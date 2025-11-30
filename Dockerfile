@@ -31,17 +31,22 @@ RUN composer install --no-dev --optimize-autoloader
 RUN chown -R www-data:www-data storage bootstrap/cache
 
 # ---------------------------------------------------------
-# 5. Nginx Configuration
+# 5. Make PHP-FPM listen on TCP 127.0.0.1:9000
+# ---------------------------------------------------------
+RUN sed -i 's/listen = .*/listen = 127.0.0.1:9000/' /usr/local/etc/php-fpm.d/www.conf
+
+# ---------------------------------------------------------
+# 6. Nginx Configuration
 # ---------------------------------------------------------
 RUN rm -f /etc/nginx/sites-enabled/default
 COPY public/default.conf /etc/nginx/conf.d/default.conf.template
 
 # ---------------------------------------------------------
-# 6. Expose port
+# 7. Expose port
 # ---------------------------------------------------------
 EXPOSE 80
 
 # ---------------------------------------------------------
-# 7. Start PHP-FPM + Nginx correctly
+# 8. Start PHP-FPM + Nginx correctly
 # ---------------------------------------------------------
 CMD ["sh", "-c", "envsubst '$PORT' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf && php-fpm & nginx -g 'daemon off;'"]
