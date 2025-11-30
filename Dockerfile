@@ -37,6 +37,3 @@ EXPOSE 80
 
 # Start Nginx and PHP-FPM
 CMD service nginx start && php-fpm
-
-# Copy custom Nginx config
-COPY public/default.conf /etc/nginx/conf.d/default.conf
