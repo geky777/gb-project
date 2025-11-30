@@ -253,7 +253,7 @@ h1 {
   .project-card h4 { font-size: 1rem; color: #e6e4df; margin: 0 0 8px; }
   .project-card p { font-size: 0.85rem; padding: 0 10px 10px; color: #cfcfcf; }
   .project-card.center { z-index: 5; }
-  .project-container:not(.active) .project-card { pointer-events: none; }
+  .project-container:not(.active) .project-card { pointer-events: auto; }
   .project-card.side {
     opacity: 0;
     transform: scale(0.8);
@@ -688,6 +688,13 @@ function toggleProjects() {
 
 if (projectTitle) projectTitle.addEventListener("click", toggleProjects);
 if (projectHint) projectHint.addEventListener("click", toggleProjects);
+
+document.addEventListener("DOMContentLoaded", () => {
+  if (projectContainer && !projectContainer.classList.contains("active")) {
+    projectContainer.classList.add("active");
+    projectCards.forEach(card => card.classList.add("show"));
+  }
+});
 
 </script>
 </body>
