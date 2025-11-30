@@ -21,7 +21,8 @@ RUN composer install --no-dev --optimize-autoloader
 # Set correct permissions
 RUN chown -R www-data:www-data storage bootstrap/cache
 
-# Copy custom Nginx config
+# Remove default Nginx site and copy custom config
+RUN rm /etc/nginx/sites-enabled/default
 COPY public/default.conf /etc/nginx/conf.d/default.conf
 
 # Expose port 80
