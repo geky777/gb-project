@@ -29,9 +29,6 @@ RUN php artisan key:generate --force \
 # Set correct permissions
 RUN chown -R www-data:www-data storage bootstrap/cache
 
-# Copy custom Nginx config (you’ll need to create nginx/default.conf)
-COPY nginx/default.conf /etc/nginx/conf.d/default.conf
-
 # Expose port 80
 EXPOSE 80
 
