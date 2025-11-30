@@ -1,4 +1,6 @@
-# Use official PHP 8.2 FPM image
+# ---------------------------------------------------------
+# 1. Base PHP-FPM Image
+# ---------------------------------------------------------
 FROM php:8.2-fpm
 
 # Install system dependencies and PHP extensions
@@ -9,24 +11,36 @@ RUN apt-get update && apt-get install -y \
 # Install Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# Set working directory
+# ---------------------------------------------------------
+# 2. Set working directory
+# ---------------------------------------------------------
 WORKDIR /var/www/html
 
-# Copy entire application
+# Copy all project files
 COPY . .
 
-# Install PHP dependencies
+# ---------------------------------------------------------
+# 3. Install PHP dependencies
+# ---------------------------------------------------------
 RUN composer install --no-dev --optimize-autoloader
 
-# Set correct permissions
+# ---------------------------------------------------------
+# 4. Set correct permissions
+# ---------------------------------------------------------
 RUN chown -R www-data:www-data storage bootstrap/cache
 
-# Remove default Nginx site and copy custom config
-RUN rm /etc/nginx/sites-enabled/default
+# ---------------------------------------------------------
+# 5. Nginx Configuration
+# ---------------------------------------------------------
+RUN rm -f /etc/nginx/sites-enabled/default
 COPY public/default.conf /etc/nginx/conf.d/default.conf
 
-# Expose port 80
+# ---------------------------------------------------------
+# 6. Expose port
+# ---------------------------------------------------------
 EXPOSE 80
 
-# Start Nginx and PHP-FPM
-CMD service nginx start && php-fpm
+# ---------------------------------------------------------
+# 7. Start PHP-FPM + Nginx correctly
+# ---------------------------------------------------------
+CMD ["sh", "-c", "php-fpm & nginx -g 'daemon off;'"]
