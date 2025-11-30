@@ -39,4 +39,4 @@ EXPOSE 80
 CMD service nginx start && php-fpm
 
 # Copy custom Nginx config
-COPY nginx/default.conf /etc/nginx/conf.d/default.conf
+COPY public/default.conf /etc/nginx/conf.d/default.conf
