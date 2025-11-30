@@ -2,3 +2,10 @@
 node_modules
 vendor
 storage/logs
+.env
+storage/framework/cache/*
+storage/framework/sessions/*
+storage/framework/views/*
+storage/testing
+npm-debug.log
+yarn-error.log
