@@ -489,26 +489,26 @@ h1 {
     <h2 >Projects</h2>
     <p style="margin-top: -50px; font-size: 20px;"  >Click twice to know more!</p>
     <div class="project-container" id="projectContainer">
-      <div class="project-card side left1 oedipus-card" onclick="window.location.href='{{ url('/oedipus') }}'">
+      <div class="project-card side left1 oedipus-card" onclick="window.location.href='{{ route('oedipus', [], false) }}'">
         <img src="images/project4.jpg" alt="Project 2">
         <h3>Oedipus Rex</h3>
         <h4>Author: Homer</h4>
         <p>Oedipus Rex, also known by its Greek title, Oedipus Tyrannus, or Oedipus the King, is an Athenian tragedy by Sophocles.</p>
       </div>
       <div class="project-card center" 
-     style="background: linear-gradient(rgba(104, 77, 53, 1), rgba(43, 31, 21, 1));">   
+     style="background: linear-gradient(rgba(104, 77, 53, 1), rgba(43, 31, 21, 1)); cursor: pointer;" onclick="window.location.href='{{ route('iliad', [], false) }}'">   
      <img src="{{ asset('asset/images/iliad.png') }}" alt="Main Project">
         <h3>Classical Age</h3>
         <h4>The Illiad</h4>
         <p>An epic poem that chronicles the wrath of Achilles during the Trojan War, exploring themes of honor, fate, and the human cost of pride.</p>
       </div>
-      <div class="project-card side right1" onclick="window.location.href='{{ url('/robert') }}'">
+      <div class="project-card side right1" onclick="window.location.href='{{ route('robert', [], false) }}'">
         <img src="images/robert.jpg" alt="Project 3">
         <h3>Phaedra</h3>
         <h4>Written by Jean Racine</h4>
         <p>Quick info about project two.</p>
       </div>
-      <div class="project-card side right2" onclick="window.location.href='{{ url('/color_purple') }}'">
+      <div class="project-card side right2" onclick="window.location.href='{{ route('color_purple', [], false) }}'">
         <img src="images/color_purple.jpg" alt="Project 4">
         <h3>Color Purple</h3>
         <h4>Author: Alice Walker</h4>
