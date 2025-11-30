@@ -56,7 +56,7 @@
   /* ================= HOME ================= */
   #home {
   background: radial-gradient(circle at center, #1e1c15 0%, #141416 100%);
-  background-image: url('images/paper-texture.png'); /* optional subtle texture */
+  background-image: url("{{ asset('images/paper-texture.png') }}"); /* optional subtle texture */
   background-size: cover;
   background-blend-mode: multiply;
 }
@@ -437,10 +437,14 @@ h1 {
 </head>
 <body>
   <nav>
-    <a href="#home">Home</a>
-    <a href="#about">About</a>
-    <a href="#projects">Projects</a>
-    <a href="#contact">Contact</a>
+    <a href="{{ route('home') }}#home">Home</a>
+    <a href="{{ route('home') }}#about">About</a>
+    <a href="{{ route('home') }}#projects">Projects</a>
+    <a href="{{ route('home') }}#contact">Contact</a>
+    <a href="{{ route('iliad') }}">Iliad</a>
+    <a href="{{ route('color_purple') }}">The Color Purple</a>
+    <a href="{{ route('oedipus') }}">Oedipus Rex</a>
+    <a href="{{ route('robert') }}">Robert Frost</a>
   </nav>
 
   <!-- HOME SECTION -->
@@ -458,10 +462,10 @@ h1 {
     <canvas id="stringCanvas"></canvas>
     <div class="card" id="card">
       <div class="card-side card-front">
-        <img src="images/card.jpg" alt="Front">
+        <img src="{{ asset('images/card.jpg') }}" alt="Front">
       </div>
       <div class="card-side card-back">
-        <img src="images/card-back.jpg" alt="Back">
+        <img src="{{ asset('images/card-back.jpg') }}" alt="Back">
       </div>
     </div>
   </section>
@@ -489,27 +493,27 @@ h1 {
     <h2 >Projects</h2>
     <p style="margin-top: -50px; font-size: 20px;"  >Click twice to know more!</p>
     <div class="project-container" id="projectContainer">
-      <div class="project-card side left1 oedipus-card" onclick="window.location.href='{{ route('oedipus', [], false) }}'">
-        <img src="images/project4.jpg" alt="Project 2">
+      <div class="project-card side left1 oedipus-card" onclick="window.location.href='{{ route('oedipus') }}'">
+        <img src="{{ asset('images/project4.jpg') }}" alt="Project 2">
         <h3>Oedipus Rex</h3>
         <h4>Author: Homer</h4>
         <p>Oedipus Rex, also known by its Greek title, Oedipus Tyrannus, or Oedipus the King, is an Athenian tragedy by Sophocles.</p>
       </div>
       <div class="project-card center" 
-     style="background: linear-gradient(rgba(104, 77, 53, 1), rgba(43, 31, 21, 1)); cursor: pointer;" onclick="window.location.href='{{ route('iliad', [], false) }}'">   
-     <img src="{{ asset('asset/images/iliad.png') }}" alt="Main Project">
+     style="background: linear-gradient(rgba(104, 77, 53, 1), rgba(43, 31, 21, 1)); cursor: pointer;" onclick="window.location.href='{{ route('iliad') }}'">   
+     <img src="{{ asset('images/iliad.png') }}" alt="Main Project">
         <h3>Classical Age</h3>
         <h4>The Illiad</h4>
         <p>An epic poem that chronicles the wrath of Achilles during the Trojan War, exploring themes of honor, fate, and the human cost of pride.</p>
       </div>
-      <div class="project-card side right1" onclick="window.location.href='{{ route('robert', [], false) }}'">
-        <img src="images/robert.jpg" alt="Project 3">
+      <div class="project-card side right1" onclick="window.location.href='{{ route('robert') }}'">
+        <img src="{{ asset('images/robert.jpg') }}" alt="Project 3">
         <h3>Phaedra</h3>
         <h4>Written by Jean Racine</h4>
         <p>Quick info about project two.</p>
       </div>
-      <div class="project-card side right2" onclick="window.location.href='{{ route('color_purple', [], false) }}'">
-        <img src="images/color_purple.jpg" alt="Project 4">
+      <div class="project-card side right2" onclick="window.location.href='{{ route('color_purple') }}'">
+        <img src="{{ asset('images/color_purple.jpg') }}" alt="Project 4">
         <h3>Color Purple</h3>
         <h4>Author: Alice Walker</h4>
         <p>The Color Purple is a 1982 epistolary novel by American author Alice Walker that won the 1983 Pulitzer Prize for Fiction and the National Book Award for Fiction.</p>
@@ -526,23 +530,23 @@ h1 {
 
   <div class="contact-container">
     <div class="contact-card">
-      <img src="images/member1.jpg" alt="Member 1" class="contact-img">
+      <img src="{{ asset('images/member1.jpg') }}" alt="Member 1" class="contact-img">
       <h3>Sarah C. Abane</h3>
     </div>
     <div class="contact-card">
-      <img src="images/member2.jpg" alt="Member 2" class="contact-img">
+      <img src="{{ asset('images/member2.jpg') }}" alt="Member 2" class="contact-img">
       <h3>Elaine Mae A. Bertiz</h3>
     </div>
     <div class="contact-card">
-      <img src="images/member3.jpg" alt="Member 3" class="contact-img">
+      <img src="{{ asset('images/member3.jpg') }}" alt="Member 3" class="contact-img">
       <h3>Richard D. Bilan</h3>
     </div>
     <div class="contact-card">
-      <img src="images/member4.jpg" alt="Member 4" class="contact-img">
+      <img src="{{ asset('images/member4.jpg') }}" alt="Member 4" class="contact-img">
       <h3>Anika Gail</h3>
     </div>
     <div class="contact-card">
-      <img src="images/member5.jpg" alt="Member 5" class="contact-img">
+      <img src="{{ asset('images/member5.jpg') }}" alt="Member 5" class="contact-img">
       <h3>Lord Zaro Fiber</h3>
     </div>
   </div>
@@ -669,36 +673,46 @@ window.addEventListener("resize", () => {
 });
 
 /* === PROJECTS Cards Animation === */
-window.addEventListener("load", () => {
-  document.querySelectorAll(".project-card").forEach((card, i) => {
-    setTimeout(() => card.classList.add("show"), i * 150);
-  });
-});
-
 const projectContainer = document.getElementById("projectContainer");
-const centerCard = projectContainer.querySelector(".center");
+const projectCards = projectContainer ? projectContainer.querySelectorAll(".project-card") : [];
+const centerCard = projectContainer ? projectContainer.querySelector(".center") : null;
+const sideCards = Array.from(projectCards).filter(card => !card.classList.contains("center"));
 let clickTimer = null;
 
-centerCard.addEventListener("click", (e) => {
-  // Prevent single click if it was a double click
-  if (clickTimer) return;
+if (projectCards.length) {
+  // Start with only the center card visible
+  projectCards.forEach(card => card.classList.remove("show"));
+  if (centerCard) {
+    centerCard.classList.add("show");
 
-  clickTimer = setTimeout(() => {
-    // Navigate to project1 route
-    window.location.href = "{{ url('/iliad') }}";
-    clickTimer = null;
-  }, 250); // 250ms delay to check for dblclick
-});
+    centerCard.addEventListener("click", () => {
+      if (clickTimer) return;
 
-centerCard.addEventListener("dblclick", (e) => {
-  // Cancel single click navigation
-  if (clickTimer) {
-    clearTimeout(clickTimer);
-    clickTimer = null;
+      clickTimer = setTimeout(() => {
+        window.location.href = "{{ route('iliad') }}";
+        clickTimer = null;
+      }, 250);
+    });
+
+    centerCard.addEventListener("dblclick", (e) => {
+      if (clickTimer) {
+        clearTimeout(clickTimer);
+        clickTimer = null;
+      }
+
+      projectContainer.classList.toggle("active");
+      const expanded = projectContainer.classList.contains("active");
+
+      sideCards.forEach(card => {
+        if (expanded) {
+          card.classList.add("show");
+        } else {
+          card.classList.remove("show");
+        }
+      });
+    });
   }
-  // Toggle animation
-  projectContainer.classList.toggle("active");
-});
+}
 
 </script>
 </body>
