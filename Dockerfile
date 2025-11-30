@@ -23,8 +23,11 @@ COPY . .
 # ---------------------------------------------------------
 # 3. Install PHP dependencies
 # ---------------------------------------------------------
-RUN composer install --no-dev --optimize-autoloader
-
+# 3. Install PHP dependencies
+RUN composer install --no-dev --optimize-autoloader \
+    && php artisan config:cache \
+    && php artisan route:cache \
+    && php artisan view:cache
 # ---------------------------------------------------------
 # 4. Set correct permissions
 # ---------------------------------------------------------
