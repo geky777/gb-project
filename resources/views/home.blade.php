@@ -52,6 +52,28 @@
   }
   nav a:hover { color: #ffffff; }
 
+  .test-redirect-btn {
+    margin: 10px auto 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 24px;
+    border: 2px solid #d4af37;
+    background: transparent;
+    color: #d4af37;
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    letter-spacing: 0.08em;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  }
+  .test-redirect-btn:hover {
+    background: #d4af37;
+    color: #232430;
+    transform: translateY(-2px);
+  }
+
   /* ================= HOME ================= */
   #home {
   background: radial-gradient(circle at center, #1e1c15 0%, #141416 100%);
@@ -443,6 +465,12 @@ h1 {
     <a href="#contact">Contact</a>
   </nav>
 
+  <div style="text-align:center;">
+    <button class="test-redirect-btn" onclick="window.location.href='{{ route('iliad', [], false) }}'">
+      Test Redirect →
+    </button>
+  </div>
+
   <!-- HOME SECTION -->
   <section id="home">
     <div class="title-block">
@@ -671,23 +699,10 @@ window.addEventListener("resize", () => {
 /* === PROJECTS Cards Animation === */
 const projectContainer = document.getElementById("projectContainer");
 const projectCards = projectContainer ? projectContainer.querySelectorAll(".project-card") : [];
-const projectTitle = document.getElementById("projectsTitle");
-const projectHint = document.getElementById("projectsToggle");
 
 if (projectCards.length) {
   projectCards.forEach(card => card.classList.remove("show"));
 }
-
-function toggleProjects() {
-  projectContainer.classList.toggle("active");
-  const expanded = projectContainer.classList.contains("active");
-  projectCards.forEach(card => {
-    card.classList.toggle("show", expanded);
-  });
-}
-
-if (projectTitle) projectTitle.addEventListener("click", toggleProjects);
-if (projectHint) projectHint.addEventListener("click", toggleProjects);
 
 document.addEventListener("DOMContentLoaded", () => {
   if (projectContainer && !projectContainer.classList.contains("active")) {
