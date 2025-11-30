@@ -36,27 +36,26 @@
 
   /* Navbar */
   nav {
-    position: fixed;
-    top: 30px;
-    left: 50%;
-    transform: translateX(-50%);
+    position: static;
     display: flex;
-    gap: 28px;
+    justify-content: center;
+    gap: 36px;
     font-weight: 700;
-    letter-spacing: 0.08em;
-    z-index: 100;
+    letter-spacing: 0.12em;
+    font-size: 1.25rem;
+    margin: 20px 0 10px;
   }
   nav a {
-    color: #e6e4df;
+    color: #d4af37;
     text-decoration: none;
     transition: color 0.18s ease;
   }
-  nav a:hover { color: #d4af37; }
+  nav a:hover { color: #ffffff; }
 
   /* ================= HOME ================= */
   #home {
   background: radial-gradient(circle at center, #1e1c15 0%, #141416 100%);
-  background-image: url("{{ asset('images/paper-texture.png') }}"); /* optional subtle texture */
+  background-image: url('images/paper-texture.png'); /* optional subtle texture */
   background-size: cover;
   background-blend-mode: multiply;
 }
@@ -254,6 +253,7 @@ h1 {
   .project-card h4 { font-size: 1rem; color: #e6e4df; margin: 0 0 8px; }
   .project-card p { font-size: 0.85rem; padding: 0 10px 10px; color: #cfcfcf; }
   .project-card.center { z-index: 5; }
+  .project-container:not(.active) .project-card { pointer-events: none; }
   .project-card.side {
     opacity: 0;
     transform: scale(0.8);
@@ -437,14 +437,10 @@ h1 {
 </head>
 <body>
   <nav>
-    <a href="{{ route('home') }}#home">Home</a>
-    <a href="{{ route('home') }}#about">About</a>
-    <a href="{{ route('home') }}#projects">Projects</a>
-    <a href="{{ route('home') }}#contact">Contact</a>
-    <a href="{{ route('iliad') }}">Iliad</a>
-    <a href="{{ route('color_purple') }}">The Color Purple</a>
-    <a href="{{ route('oedipus') }}">Oedipus Rex</a>
-    <a href="{{ route('robert') }}">Robert Frost</a>
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
   </nav>
 
   <!-- HOME SECTION -->
@@ -462,10 +458,10 @@ h1 {
     <canvas id="stringCanvas"></canvas>
     <div class="card" id="card">
       <div class="card-side card-front">
-        <img src="{{ asset('images/card.jpg') }}" alt="Front">
+        <img src="images/card.jpg" alt="Front">
       </div>
       <div class="card-side card-back">
-        <img src="{{ asset('images/card-back.jpg') }}" alt="Back">
+        <img src="images/card-back.jpg" alt="Back">
       </div>
     </div>
   </section>
@@ -490,30 +486,30 @@ h1 {
 
   <!-- PROJECTS SECTION -->
   <section id="projects">
-    <h2 >Projects</h2>
-    <p style="margin-top: -50px; font-size: 20px;"  >Click twice to know more!</p>
+    <h2 id="projectsTitle">Projects</h2>
+    <p id="projectsToggle" style="margin-top: -50px; font-size: 20px;">Click to know more!</p>
     <div class="project-container" id="projectContainer">
-      <div class="project-card side left1 oedipus-card" onclick="window.location.href='{{ route('oedipus') }}'">
-        <img src="{{ asset('images/project4.jpg') }}" alt="Project 2">
+      <div class="project-card side left1 oedipus-card" onclick="window.location.href='{{ route('oedipus', [], false) }}'">
+        <img src="images/project4.jpg" alt="Project 2">
         <h3>Oedipus Rex</h3>
         <h4>Author: Homer</h4>
         <p>Oedipus Rex, also known by its Greek title, Oedipus Tyrannus, or Oedipus the King, is an Athenian tragedy by Sophocles.</p>
       </div>
       <div class="project-card center" 
-     style="background: linear-gradient(rgba(104, 77, 53, 1), rgba(43, 31, 21, 1)); cursor: pointer;" onclick="window.location.href='{{ route('iliad') }}'">   
-     <img src="{{ asset('images/iliad.png') }}" alt="Main Project">
+     style="background: linear-gradient(rgba(104, 77, 53, 1), rgba(43, 31, 21, 1)); cursor: pointer;" onclick="window.location.href='{{ route('iliad', [], false) }}'">   
+     <img src="{{ asset('asset/images/iliad.png') }}" alt="Main Project">
         <h3>Classical Age</h3>
         <h4>The Illiad</h4>
         <p>An epic poem that chronicles the wrath of Achilles during the Trojan War, exploring themes of honor, fate, and the human cost of pride.</p>
       </div>
-      <div class="project-card side right1" onclick="window.location.href='{{ route('robert') }}'">
-        <img src="{{ asset('images/robert.jpg') }}" alt="Project 3">
+      <div class="project-card side right1" onclick="window.location.href='{{ route('robert', [], false) }}'">
+        <img src="images/robert.jpg" alt="Project 3">
         <h3>Phaedra</h3>
         <h4>Written by Jean Racine</h4>
         <p>Quick info about project two.</p>
       </div>
-      <div class="project-card side right2" onclick="window.location.href='{{ route('color_purple') }}'">
-        <img src="{{ asset('images/color_purple.jpg') }}" alt="Project 4">
+      <div class="project-card side right2" onclick="window.location.href='{{ route('color_purple', [], false) }}'">
+        <img src="images/color_purple.jpg" alt="Project 4">
         <h3>Color Purple</h3>
         <h4>Author: Alice Walker</h4>
         <p>The Color Purple is a 1982 epistolary novel by American author Alice Walker that won the 1983 Pulitzer Prize for Fiction and the National Book Award for Fiction.</p>
@@ -530,23 +526,23 @@ h1 {
 
   <div class="contact-container">
     <div class="contact-card">
-      <img src="{{ asset('images/member1.jpg') }}" alt="Member 1" class="contact-img">
+      <img src="images/member1.jpg" alt="Member 1" class="contact-img">
       <h3>Sarah C. Abane</h3>
     </div>
     <div class="contact-card">
-      <img src="{{ asset('images/member2.jpg') }}" alt="Member 2" class="contact-img">
+      <img src="images/member2.jpg" alt="Member 2" class="contact-img">
       <h3>Elaine Mae A. Bertiz</h3>
     </div>
     <div class="contact-card">
-      <img src="{{ asset('images/member3.jpg') }}" alt="Member 3" class="contact-img">
+      <img src="images/member3.jpg" alt="Member 3" class="contact-img">
       <h3>Richard D. Bilan</h3>
     </div>
     <div class="contact-card">
-      <img src="{{ asset('images/member4.jpg') }}" alt="Member 4" class="contact-img">
-      <h3>Anika Gail</h3>
+      <img src="images/member4.jpg" alt="Member 4" class="contact-img">
+      <h3>Anikka Gail Cipriano</h3>
     </div>
     <div class="contact-card">
-      <img src="{{ asset('images/member5.jpg') }}" alt="Member 5" class="contact-img">
+      <img src="images/member5.jpg" alt="Member 5" class="contact-img">
       <h3>Lord Zaro Fiber</h3>
     </div>
   </div>
@@ -675,44 +671,23 @@ window.addEventListener("resize", () => {
 /* === PROJECTS Cards Animation === */
 const projectContainer = document.getElementById("projectContainer");
 const projectCards = projectContainer ? projectContainer.querySelectorAll(".project-card") : [];
-const centerCard = projectContainer ? projectContainer.querySelector(".center") : null;
-const sideCards = Array.from(projectCards).filter(card => !card.classList.contains("center"));
-let clickTimer = null;
+const projectTitle = document.getElementById("projectsTitle");
+const projectHint = document.getElementById("projectsToggle");
 
 if (projectCards.length) {
-  // Start with only the center card visible
   projectCards.forEach(card => card.classList.remove("show"));
-  if (centerCard) {
-    centerCard.classList.add("show");
-
-    centerCard.addEventListener("click", () => {
-      if (clickTimer) return;
-
-      clickTimer = setTimeout(() => {
-        window.location.href = "{{ route('iliad') }}";
-        clickTimer = null;
-      }, 250);
-    });
-
-    centerCard.addEventListener("dblclick", (e) => {
-      if (clickTimer) {
-        clearTimeout(clickTimer);
-        clickTimer = null;
-      }
-
-      projectContainer.classList.toggle("active");
-      const expanded = projectContainer.classList.contains("active");
-
-      sideCards.forEach(card => {
-        if (expanded) {
-          card.classList.add("show");
-        } else {
-          card.classList.remove("show");
-        }
-      });
-    });
-  }
 }
+
+function toggleProjects() {
+  projectContainer.classList.toggle("active");
+  const expanded = projectContainer.classList.contains("active");
+  projectCards.forEach(card => {
+    card.classList.toggle("show", expanded);
+  });
+}
+
+if (projectTitle) projectTitle.addEventListener("click", toggleProjects);
+if (projectHint) projectHint.addEventListener("click", toggleProjects);
 
 </script>
 </body>
