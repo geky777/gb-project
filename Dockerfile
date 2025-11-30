@@ -18,13 +18,11 @@ COPY . .
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader
 
-# Laravel setup
-RUN php artisan key:generate --force \
-    && php artisan config:cache \
-    && php artisan route:cache
-
 # Set correct permissions
 RUN chown -R www-data:www-data storage bootstrap/cache
+
+# Copy custom Nginx config
+COPY public/default.conf /etc/nginx/conf.d/default.conf
 
 # Expose port 80
 EXPOSE 80
